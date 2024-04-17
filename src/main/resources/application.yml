@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/querydsl
+    username: root
+    password: 8011
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #show_sql: true
+        format_sql: true
+        #default_batch_fetch_size: 100
+        default_batch_fetch_size: 100
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+  #org.hibernate.type: trace # parameter ? ??
+
+decorator:
+  datasource:
+    # p6spy ?? ??
+    p6spy:
+      enable-logging: true
+      multiline: true
+      logging: slf4j
