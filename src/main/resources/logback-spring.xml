@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 로그가 저장될 경로 -->
+    <property name="LOG_PATH" value="/log" />
+
+    <!-- 파일로 로그를 작성할 때 -->
+    <!--
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/ldata.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/ldata.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %level [%thread] %msg%n</pattern>
+        </encoder>
+    </appender>
+    -->
+    <!-- 콘솔에서 로그를 작성할 때 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--  <pattern>%msg%n</pattern> -->
+            <!--<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>-->
+            <!--<pattern>%d{HH:mm:ss.SSS} %highlight(%-5level) %logger{36} - %msg%n</pattern>-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%thread] %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 프로그램에서 적용될 로그 레벨 -->
+    <root level="INFO">
+        <!--<appender-ref ref="FILE" />-->
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
