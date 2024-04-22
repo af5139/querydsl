@@ -112,24 +112,26 @@ public class QuerydslBasicTest {
 
     @Test
     public void resultFetch(){
+        //list 로 조회
         queryFactory
                 .selectFrom(member)
                 .fetch();
-
-//        queryFactory.selectFrom(member)
-//                .fetchOne();
-
+        //단 건 조회
+        queryFactory.selectFrom(member)
+                .fetchOne();
+        //처음 한 건 조회
         queryFactory
                 .selectFrom(member)
                 .fetchFirst();
-
+        //페이징에서 사용
         QueryResults<Member> results = queryFactory
                 .selectFrom(member)
                 .fetchResults();
 
         results.getTotal();
+        //결과값
         List<Member> content = results.getResults();
-
+        //count 쿼리
         long total = queryFactory.selectFrom(member)
                 .fetchCount();
     }
@@ -150,6 +152,7 @@ public class QuerydslBasicTest {
                 .selectFrom(member)
                 .where(member.age.eq(100))
                 .orderBy(member.age.desc(), member.username.asc().nullsLast())
+//                .orderBy(member.age.desc(), member.username.asc().nullsFirst())
                 .fetch();
 
         Member member5 = result.get(0);
@@ -206,6 +209,7 @@ public class QuerydslBasicTest {
                 .from(member)
                 .join(member.team, team)
                 .groupBy(team.name)
+                //.having(member.age.avg().gt(10))
                 .fetch();
 
         Tuple teamA = result.get(0);
@@ -213,7 +217,6 @@ public class QuerydslBasicTest {
 
         assertThat(teamA.get(team.name)).isEqualTo("teamA");
         assertThat(teamA.get(member.age.avg())).isEqualTo(15);
-
     }
 
     @Test
